@@ -3,13 +3,13 @@ public class Main {
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
 
-
     public static int computeEmpWage(String company, int empRatePerHour,
                                      int numOfWorkingDays, int maxHoursPerMonth) {
         // Class Members(variables)
         int empHours = 0;
         int totalEmpHour = 0;
         int totalEmpDay = 0;
+        int dailyWage = 0;
         //Computation
         while (totalEmpHour <= maxHoursPerMonth && totalEmpDay <= numOfWorkingDays) {
             totalEmpDay++;
@@ -25,10 +25,11 @@ public class Main {
                     empHours = 0;
             }
             totalEmpHour += empHours;
-            System.out.println("Day#: " + totalEmpDay + "Emp hour: " + empHours);
+            dailyWage = empHours * empRatePerHour;
+            System.out.println("Day#: " + totalEmpDay + "Emp hour: " + empHours + ", Daily Wage: " + dailyWage );
         }
         int totalEmpWage = totalEmpHour * empRatePerHour;
-        System.out.println("Total Emp Wage for the Company: " + company + " is :" + totalEmpWage);
+        System.out.println("Total Emp Wage for the Company: " + company + " is :" + totalEmpWage + "\n");
         return totalEmpWage;
     }
 
