@@ -1,11 +1,7 @@
 
 
-abstract class InterfaceEmpWage {
+public interface InterfaceEmpWage {
+    public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
 
-    public abstract void computeWage();
-
-    public interface interfaceEmpWage {
-        public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
-        public void computeWage();
-    }
+    public void computeWage();
 }
