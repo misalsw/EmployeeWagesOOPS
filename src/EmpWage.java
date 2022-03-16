@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EmpWage implements InterfaceEmpWage {
     // declaring static variables
@@ -6,15 +8,18 @@ public class EmpWage implements InterfaceEmpWage {
     public static final int IS_PART_TIME = 2;
     // using Array List
     private ArrayList<CompanyEmpWage> companyEmpArrayList;
-
+    private Map<String, CompanyEmpWage> companyToEmpWageMap;
+    // using constructor
     public EmpWage() {
         companyEmpArrayList = new ArrayList<CompanyEmpWage>();
+        companyToEmpWageMap = new HashMap<>();
     }
 
     public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
 
         CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
         companyEmpArrayList.add(companyEmpWage);
+        companyToEmpWageMap.put(company, companyEmpWage);
     }
 
     public void computeEmpWage() {
@@ -78,8 +83,18 @@ public class EmpWage implements InterfaceEmpWage {
 
     @Override
     public void computeWage() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < companyEmpArrayList.size(); i++) {
+            CompanyEmpWage companyEmpWage = companyEmpArrayList.get(i);
+            companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println("Company Name : " + companyEmpWage.company);
+            DisplayDailyWageforCompany(companyEmpWage);
+            System.out.println("Total Wage is:" + companyEmpWage.totalWage);
+        }
 
+}
+
+    @Override
+    public int getTotalWage(String company) {
+            return companyToEmpWageMap.get(company).totalWage;
     }
-
 }
