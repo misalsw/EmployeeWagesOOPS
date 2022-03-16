@@ -1,29 +1,30 @@
-
+import java.util.ArrayList;
 
 public class EmpWage extends InterfaceEmpWage {
     // declaring static variables
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
-    private int numOfCompany = 0;
-    private CompanyEmpWage[] companyEmpWageArray;
+    private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
 
     public EmpWage() {
-        companyEmpWageArray = new CompanyEmpWage[5];
+        companyEmpWageArrayList = new  ArrayList<CompanyEmpWage>();
     }
     private void  addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
 
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
-        numOfCompany++;
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+        companyEmpWageArrayList.add(companyEmpWage);
     }
 
     private void computeEmpWage() {
-        for(int i=0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+        for(int i=0; i < companyEmpWageArrayList.size(); i++) {
+                CompanyEmpWage companyEmpWage = companyEmpWageArrayList.get(i);
+                companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage.company + "Total Wage is " + companyEmpWage.totalWage);
+
         }
     }
-    private int  computeEmpWage(CompanyEmpWage companyEmpWage) {
+    public int computeEmpWage(CompanyEmpWage companyEmpWage) {
         // variables
         int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
         // computation
@@ -60,9 +61,14 @@ public class EmpWage extends InterfaceEmpWage {
 
         System.out.println("Welcome to Employee Wage calculation");
         EmpWage empwage = new EmpWage();
-        empwage.addCompanyEmpWage("Dmart", 20, 2, 10);
+        empwage.addCompanyEmpWage("Dmart", 20, 8, 10);
+        empwage.computeEmpWage();
         empwage.addCompanyEmpWage(" BIGBAZAR ", 5, 25, 25);
         empwage.computeEmpWage();
     }
+   @Override
+   public void computeWage(){
+
+   }
 
 }
