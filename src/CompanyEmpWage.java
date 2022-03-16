@@ -24,9 +24,4 @@ public class CompanyEmpWage {
     public void setTotalEmpWage(int totalWage) {
         this.totalWage = totalWage;
     }
-
-    @Override
-    public String toString() {
-        return "Total Emp Wage for company: " + company + " is :" + totalWage;
-    }
 }
